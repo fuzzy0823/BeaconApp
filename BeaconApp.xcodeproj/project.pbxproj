@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241588671A0A4E4800EF74D1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241588661A0A4E4800EF74D1 /* CoreLocation.framework */; };
 		3608C3081A09FCDD006D06DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608C3071A09FCDD006D06DF /* AppDelegate.swift */; };
 		3608C30A1A09FCDD006D06DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608C3091A09FCDD006D06DF /* ViewController.swift */; };
 		3608C30D1A09FCDD006D06DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3608C30B1A09FCDD006D06DF /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		241588661A0A4E4800EF74D1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3608C3021A09FCDD006D06DF /* BeaconApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3608C3061A09FCDD006D06DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3608C3071A09FCDD006D06DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241588671A0A4E4800EF74D1 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +62,7 @@
 		3608C2F91A09FCDC006D06DF = {
 			isa = PBXGroup;
 			children = (
+				241588661A0A4E4800EF74D1 /* CoreLocation.framework */,
 				3608C3041A09FCDD006D06DF /* BeaconApp */,
 				3608C31A1A09FCDE006D06DF /* BeaconAppTests */,
 				3608C3031A09FCDD006D06DF /* Products */,
@@ -405,6 +409,7 @@
 				3608C3231A09FCDE006D06DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3608C3241A09FCDE006D06DF /* Build configuration list for PBXNativeTarget "BeaconAppTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				3608C3261A09FCDE006D06DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
