@@ -14,6 +14,7 @@
 		3608C30F1A09FCDD006D06DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3608C30E1A09FCDD006D06DF /* Images.xcassets */; };
 		3608C3121A09FCDD006D06DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3608C3101A09FCDD006D06DF /* LaunchScreen.xib */; };
 		3608C31E1A09FCDE006D06DF /* BeaconAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608C31D1A09FCDE006D06DF /* BeaconAppTests.swift */; };
+		AEB0A7F61A1081140090F8E7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB0A7F51A1081140090F8E7 /* CoreBluetooth.framework */; };
 		B5965A451A107C0B0001C17C /* ibeacon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5965A441A107C0B0001C17C /* ibeacon.png */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		3608C3171A09FCDE006D06DF /* BeaconAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeaconAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3608C31C1A09FCDE006D06DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3608C31D1A09FCDE006D06DF /* BeaconAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconAppTests.swift; sourceTree = "<group>"; };
+		AEB0A7F51A1081140090F8E7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B5965A441A107C0B0001C17C /* ibeacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibeacon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB0A7F61A1081140090F8E7 /* CoreBluetooth.framework in Frameworks */,
 				241588671A0A4E4800EF74D1 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +67,7 @@
 		3608C2F91A09FCDC006D06DF = {
 			isa = PBXGroup;
 			children = (
+				AEB0A7F51A1081140090F8E7 /* CoreBluetooth.framework */,
 				241588661A0A4E4800EF74D1 /* CoreLocation.framework */,
 				3608C3041A09FCDD006D06DF /* BeaconApp */,
 				3608C31A1A09FCDE006D06DF /* BeaconAppTests */,
