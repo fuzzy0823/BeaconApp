@@ -172,10 +172,10 @@
 				TargetAttributes = {
 					3608C3011A09FCDC006D06DF = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = HTW933S9W3;
 					};
 					3608C3161A09FCDE006D06DF = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = YT53SFG2Q8;
 						TestTargetID = 3608C3011A09FCDC006D06DF;
 					};
 				};

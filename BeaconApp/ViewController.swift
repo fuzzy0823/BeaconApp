@@ -411,5 +411,26 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         return true;
         
     }
-    
+
+    /* --- 下記はLSストレージ保存処理。後ほど別クラスに移植する --- */
+    //--- ここから ---
+    //保存のキー名
+    private let UserNumber = "UserNumber"
+    private let PassWord = "PassWord"
+
+    /*
+    入力された社員番号をLSに保存する
+    */
+    func setUserNumber(userNumber : String){
+        NSUserDefaults().setValue(userNumber, forKey: UserNumber)
+        NSUserDefaults().synchronize()
+    }
+    /*
+    入力されたパスワードをLSに保存する
+    */
+    func setPassword(password : String){
+        NSUserDefaults().setValue(password, forKey: PassWord)
+        NSUserDefaults().synchronize()
+    }
+    //--- ここまで ---
 }
