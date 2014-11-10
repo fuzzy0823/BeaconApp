@@ -13,18 +13,15 @@ import CoreBluetooth
 class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerViewDelegate, UIPickerViewDataSource , UITextFieldDelegate{
     
     
+    @IBOutlet var UuidText: UITextField!
+    @IBOutlet var majorIdPicker1: UIPickerView!
+    @IBOutlet var majorIdPicker2: UIPickerView!
+    @IBOutlet var minorIdPicker1: UIPickerView!
+    @IBOutlet var minorIdPicker2: UIPickerView!
     
     // LocationManager
     
     var myPheripheralManager:CBPeripheralManager!
-    
-    // UIPickerView.
-    
-    let myIdPicker: UIPickerView = UIPickerView()
-    
-    // UIPickerView.
-    
-    let myUuidPicker: UIPickerView = UIPickerView()
     
     // Button
     
@@ -58,7 +55,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     
     // UUID
     
-    var myUuid: NSString = ""
+    var myUuid: NSString = "CB86BC31-05BD-40CC-903D-1C9BD13D966A"
     
     
     
@@ -94,10 +91,31 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         self.view.addSubview(myMinorLabel)
         
         // Picker(Major/Minor用)
-        myIdPicker.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
-        myIdPicker.delegate = self
-        myIdPicker.dataSource = self
-        self.view.addSubview(myIdPicker)
+//        myIdPicker.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
+//        myIdPicker.delegate = self
+//        myIdPicker.dataSource = self
+//        self.view.addSubview(myIdPicker)
+
+//        majorIdPicker1.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
+        majorIdPicker1.delegate = self
+        majorIdPicker1.dataSource = self
+        self.view.addSubview(majorIdPicker1)
+
+//        majorIdPicker2.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
+        majorIdPicker2.delegate = self
+        majorIdPicker2.dataSource = self
+        self.view.addSubview(majorIdPicker2)
+
+//        minorIdPicker1.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
+        minorIdPicker1.delegate = self
+        minorIdPicker1.dataSource = self
+        self.view.addSubview(minorIdPicker1)
+
+//        minorIdPicker2.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
+        minorIdPicker2.delegate = self
+        minorIdPicker2.dataSource = self
+        self.view.addSubview(minorIdPicker2)
+
         
         // Label(UUID用)
         let myLabel: UILabel = UILabel(frame: CGRectMake(0, centerOfY - 220, self.view.bounds.width, 20))
@@ -106,10 +124,15 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         self.view.addSubview(myLabel)
         
         // Pickter(UUID用)
-        myUuidPicker.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
-        myUuidPicker.delegate = self
-        myUuidPicker.dataSource = self
-        self.view.addSubview(myUuidPicker)
+        UuidText.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
+        UuidText.delegate = self
+        self.view.addSubview(UuidText)
+
+        
+//        myUuidPicker.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
+//        myUuidPicker.delegate = self
+//        myUuidPicker.dataSource = self
+//        self.view.addSubview(myUuidPicker)
         
         // サイズ
         myButton.frame = CGRectMake(0,0,80,80)
@@ -248,19 +271,22 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         
-        if pickerView == myIdPicker {
-            
-            return 4
-            
-        } else if pickerView == myUuidPicker {
-            
-            return 1
-            
-        } else {
-            
-            return 0
-            
-        }
+        return 1
+
+//        if pickerView == myIdPicker {
+//            
+//            return 4
+//            
+//        } else
+//            if pickerView == myUuidPicker {
+//            
+//            return 1
+//            
+//        } else {
+//            
+//            return 0
+//            
+//        }
         
     }
     
@@ -278,24 +304,30 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
             println("reusing label")
             
         }
+
         
-        if pickerView == myIdPicker {
+        lab.text = self.myValues[row] as? String
+
+        lab.font = UIFont.systemFontOfSize(CGFloat(25))
             
-            lab.text = self.myValues[row] as? String
-            
-            lab.font = UIFont.systemFontOfSize(CGFloat(25))
-            
-        } else if pickerView == myUuidPicker {
-            
-            lab.text = self.myUuids[row] as? String
-            
-            lab.font = UIFont.systemFontOfSize(CGFloat(14))
-            
-        } else {
-            
-            lab.text = self.myUuids[row] as? String
-            
-        }
+        
+//        if pickerView == myIdPicker {
+//            
+//            lab.text = self.myValues[row] as? String
+//            
+//            lab.font = UIFont.systemFontOfSize(CGFloat(25))
+//            
+//        } else if pickerView == myUuidPicker {
+//            
+//            lab.text = self.myUuids[row] as? String
+//            
+//            lab.font = UIFont.systemFontOfSize(CGFloat(14))
+//            
+//        } else {
+//            
+//            lab.text = self.myUuids[row] as? String
+//            
+//        }
         
         lab.backgroundColor = UIColor.clearColor()
         
@@ -309,42 +341,18 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     表示するデータ数.
     */
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        if pickerView == myIdPicker {
-            
-            return myValues.count
-            
-        } else if pickerView == myUuidPicker {
-            
-            return myUuids.count
-            
-        } else {
-            
-            return 0
-            
-        }
-        
+
+        return myValues.count
+
     }
     
     /*
     値を代入.
     */
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
-        
-        if pickerView == myIdPicker {
-            
-            return myValues[row] as String
-            
-        } else if pickerView == myUuidPicker {
-            
-            return myUuids[row] as String
-            
-        } else {
-            
-            return ""
-            
-        }
-        
+
+        return myValues[row] as String
+
     }
     
     /*
@@ -352,32 +360,24 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     */
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if pickerView == myIdPicker {
+        if pickerView == majorIdPicker1 {
             
-            if component == 0 {
-                
-                myMajorId1 = myValues[row] as String
-                
-            } else if component == 1 {
-                
-                myMajorId2 = myValues[row] as String
-                
-            } else if component == 2 {
-                
-                myMinorId1 = myValues[row] as String
-                
-            } else if component == 3 {
-                
-                myMinorId2 = myValues[row] as String
-                
-            }
+            myMajorId1 = myValues[row] as String
             
-        } else if pickerView == myUuidPicker {
+        } else if pickerView == majorIdPicker2 {
             
-            myUuid = myUuids[row] as String
+            myMajorId2 = myValues[row] as String
             
+        } else if pickerView == minorIdPicker1 {
+            
+            myMinorId1 = myValues[row] as String
+            
+        } else if pickerView == minorIdPicker2 {
+            
+            myMinorId2 = myValues[row] as String
+                
         }
-        
+
         
     }
     
@@ -386,8 +386,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     */
     func textFieldDidBeginEditing(textField: UITextField!){
         
-        println("textFieldDidBeginEditing:" + textField.text);
-        
+        return;
+
     }
     
     /*
@@ -395,7 +395,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     */
     func textFieldShouldEndEditing(textField: UITextField!) -> Bool {
         
-        println("textFieldShouldEndEditing:" + textField.text);
+        myUuid = textField.text;
+        
         
         return true;
         
