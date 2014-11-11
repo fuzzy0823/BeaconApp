@@ -13,7 +13,7 @@ import Foundation
 Sample : Logger.log("hogehoge")
 */
 class Logger {
-    class func log(message:String,
+     func log(message:String,
         function:String = __FUNCTION__,
         file:String = __FILE__,
         line:Int = __LINE__){
