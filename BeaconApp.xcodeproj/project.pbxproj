@@ -15,6 +15,7 @@
 		3608C3121A09FCDD006D06DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3608C3101A09FCDD006D06DF /* LaunchScreen.xib */; };
 		3608C31E1A09FCDE006D06DF /* BeaconAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608C31D1A09FCDE006D06DF /* BeaconAppTests.swift */; };
 		AEB0A7F61A1081140090F8E7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB0A7F51A1081140090F8E7 /* CoreBluetooth.framework */; };
+		AEB0A7F81A1192B30090F8E7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A7F71A1192B30090F8E7 /* Logger.swift */; };
 		B5965A451A107C0B0001C17C /* ibeacon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5965A441A107C0B0001C17C /* ibeacon.png */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		3608C31C1A09FCDE006D06DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3608C31D1A09FCDE006D06DF /* BeaconAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconAppTests.swift; sourceTree = "<group>"; };
 		AEB0A7F51A1081140090F8E7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		AEB0A7F71A1192B30090F8E7 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		B5965A441A107C0B0001C17C /* ibeacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibeacon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 				3608C30E1A09FCDD006D06DF /* Images.xcassets */,
 				3608C3101A09FCDD006D06DF /* LaunchScreen.xib */,
 				3608C3051A09FCDD006D06DF /* Supporting Files */,
+				AEB0A7F71A1192B30090F8E7 /* Logger.swift */,
 			);
 			path = BeaconApp;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3608C30A1A09FCDD006D06DF /* ViewController.swift in Sources */,
+				AEB0A7F81A1192B30090F8E7 /* Logger.swift in Sources */,
 				3608C3081A09FCDD006D06DF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

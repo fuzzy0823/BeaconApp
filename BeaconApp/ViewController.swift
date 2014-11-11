@@ -434,24 +434,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         NSUserDefaults().synchronize()
     }
     //--- ここまで ---
-
-    /*
-    Logger.swift
-      ログ出力時に、ファイル名、メソッド名、行を出力
-      Sample : Logger.log("hogehoge")
-    */
-    class Logger {
-        class func log(message:String,
-            function:String = __FUNCTION__,
-            file:String = __FILE__,
-            line:Int = __LINE__){
-                var filename = file
-                if let match = filename.rangeOfString("[^/]*$", options: .RegularExpressionSearch){
-                    filename = filename.substringWithRange(match)
-                }
-                println("Log:\(filename):L\(line):\(function) \"\(message)\"")
-            }
-    }
     
     
     
