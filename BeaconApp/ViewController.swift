@@ -20,49 +20,30 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     @IBOutlet var minorIdPicker2: UIPickerView!
     
     // LocationManager
-    
     var myPheripheralManager:CBPeripheralManager!
-    
     // Button
-    
     let myButton: UIButton = UIButton()
-    
     // UUID
-    
     var myTextField: UITextField!
-    
     // Window
-    
     var myWindow: UIWindow!
-    
     let myWindowButton = UIButton()
-    
     // MajorId(上位)
-    
     var myMajorId1: NSString = "0"
-    
     // MajorId(下位)
-    
     var myMajorId2: NSString = "0"
-    
     // MinorId(上位)
-    
     var myMinorId1: NSString = "0"
-    
     // MinorId(下位)
-    
     var myMinorId2: NSString = "0"
     
     // UUID
-    
     var myUuid: NSString = "CB86BC31-05BD-40CC-903D-1C9BD13D966A"
     
     
     
     // 表示する値の配列.
-    
     let myValues: NSArray = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]
-    
     let myUuids: NSArray = ["CB86BC31-05BD-40CC-903D-1C9BD13D966A"]
     
     
@@ -79,7 +60,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         let centexOfX: CGFloat = self.view.bounds.width/2
         let centerOfY: CGFloat = self.view.bounds.height/2
         
-        // Picker(UUID用)
         let myMajorLabel: UILabel = UILabel(frame: CGRectMake(0, centerOfY - 120, self.view.bounds.width - 150, 20))
         myMajorLabel.text = "Major Id"
         myMajorLabel.textAlignment = NSTextAlignment.Center
@@ -90,28 +70,18 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         myMinorLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(myMinorLabel)
         
-        // Picker(Major/Minor用)
-//        myIdPicker.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
-//        myIdPicker.delegate = self
-//        myIdPicker.dataSource = self
-//        self.view.addSubview(myIdPicker)
-
-//        majorIdPicker1.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
         majorIdPicker1.delegate = self
         majorIdPicker1.dataSource = self
         self.view.addSubview(majorIdPicker1)
 
-//        majorIdPicker2.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
         majorIdPicker2.delegate = self
         majorIdPicker2.dataSource = self
         self.view.addSubview(majorIdPicker2)
 
-//        minorIdPicker1.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
         minorIdPicker1.delegate = self
         minorIdPicker1.dataSource = self
         self.view.addSubview(minorIdPicker1)
 
-//        minorIdPicker2.frame = CGRectMake(0, centexOfX, self.view.bounds.width, 150)
         minorIdPicker2.delegate = self
         minorIdPicker2.dataSource = self
         self.view.addSubview(minorIdPicker2)
@@ -127,12 +97,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         UuidText.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
         UuidText.delegate = self
         self.view.addSubview(UuidText)
-
-        
-//        myUuidPicker.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
-//        myUuidPicker.delegate = self
-//        myUuidPicker.dataSource = self
-//        self.view.addSubview(myUuidPicker)
         
         // サイズ
         myButton.frame = CGRectMake(0,0,80,80)
@@ -272,21 +236,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         
         return 1
-
-//        if pickerView == myIdPicker {
-//            
-//            return 4
-//            
-//        } else
-//            if pickerView == myUuidPicker {
-//            
-//            return 1
-//            
-//        } else {
-//            
-//            return 0
-//            
-//        }
         
     }
     
@@ -309,26 +258,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         lab.text = self.myValues[row] as? String
 
         lab.font = UIFont.systemFontOfSize(CGFloat(25))
-            
-        
-//        if pickerView == myIdPicker {
-//            
-//            lab.text = self.myValues[row] as? String
-//            
-//            lab.font = UIFont.systemFontOfSize(CGFloat(25))
-//            
-//        } else if pickerView == myUuidPicker {
-//            
-//            lab.text = self.myUuids[row] as? String
-//            
-//            lab.font = UIFont.systemFontOfSize(CGFloat(14))
-//            
-//        } else {
-//            
-//            lab.text = self.myUuids[row] as? String
-//            
-//        }
-        
         lab.backgroundColor = UIColor.clearColor()
         
         lab.sizeToFit()
