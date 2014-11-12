@@ -201,7 +201,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
             
             // Advertisingのフォーマットを作成.
             let myBeaconPeripheralData = myBeaconRegion.peripheralDataWithMeasuredPower(nil)
-            
+            println(myBeaconPeripheralData)
             // Advertisingを発信.
             myPheripheralManager.startAdvertising(myBeaconPeripheralData)
             
@@ -260,13 +260,11 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager!) {
         
         println("peripheralManagerDidUpdateState")
-        
     }
     
     func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager!, error: NSError!) {
         
         println("peripheralManagerDidStartAdvertising")
-        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
