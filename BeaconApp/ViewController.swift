@@ -10,44 +10,19 @@ import UIKit
 import CoreLocation
 import CoreBluetooth
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerViewDelegate, UIPickerViewDataSource , UITextFieldDelegate{
-    
-    
-    @IBOutlet var UuidText: UITextField!
-    @IBOutlet var majorIdPicker1: UIPickerView!
-    @IBOutlet var majorIdPicker2: UIPickerView!
-    @IBOutlet var minorIdPicker1: UIPickerView!
-    @IBOutlet var minorIdPicker2: UIPickerView!
+class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextFieldDelegate {
     
     // LocationManager
     var myPheripheralManager:CBPeripheralManager!
-    // Button
     let myButton: UIButton = UIButton()
-    // UUID
-    var myTextField: UITextField!
-    // Window
     var myWindow: UIWindow!
     let myWindowButton = UIButton()
-    // MajorId(上位)
-    var myMajorId1: NSString = "0"
-    // MajorId(下位)
-    var myMajorId2: NSString = "0"
-    // MinorId(上位)
-    var myMinorId1: NSString = "0"
-    // MinorId(下位)
-    var myMinorId2: NSString = "0"
     
     // UUID
     var myUuid: NSString = "CB86BC31-05BD-40CC-903D-1C9BD13D966A"
-    
-    
-    
-    // 表示する値の配列.
-    let myValues: NSArray = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]
-    let myUuids: NSArray = ["CB86BC31-05BD-40CC-903D-1C9BD13D966A"]
-    
-    
-    
+    var myMajorString: NSString = "00"
+    var myMinorString: NSString = "00"
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -55,50 +30,10 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         // PeripheralManagerを定義.
         myPheripheralManager = CBPeripheralManager(delegate: self, queue: nil)
         
-        myUuid = myUuids[0] as String
-        
         let centexOfX: CGFloat = self.view.bounds.width/2
         let centerOfY: CGFloat = self.view.bounds.height/2
         
-        let myMajorLabel: UILabel = UILabel(frame: CGRectMake(0, centerOfY - 120, self.view.bounds.width - 150, 20))
-        myMajorLabel.text = "Major Id"
-        myMajorLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(myMajorLabel)
-        
-        let myMinorLabel: UILabel = UILabel(frame: CGRectMake(0, centerOfY - 120, self.view.bounds.width + 150, 20))
-        myMinorLabel.text = "Minor Id"
-        myMinorLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(myMinorLabel)
-        
-        majorIdPicker1.delegate = self
-        majorIdPicker1.dataSource = self
-        self.view.addSubview(majorIdPicker1)
-
-        majorIdPicker2.delegate = self
-        majorIdPicker2.dataSource = self
-        self.view.addSubview(majorIdPicker2)
-
-        minorIdPicker1.delegate = self
-        minorIdPicker1.dataSource = self
-        self.view.addSubview(minorIdPicker1)
-
-        minorIdPicker2.delegate = self
-        minorIdPicker2.dataSource = self
-        self.view.addSubview(minorIdPicker2)
-
-        
-        // Label(UUID用)
-        let myLabel: UILabel = UILabel(frame: CGRectMake(0, centerOfY - 220, self.view.bounds.width, 20))
-        myLabel.text = "UUID"
-        myLabel.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(myLabel)
-        
-        // Pickter(UUID用)
-        UuidText.frame = CGRectMake(0, centerOfY - 250, self.view.bounds.width, 100)
-        UuidText.delegate = self
-        self.view.addSubview(UuidText)
-        
-        // サイズ
+        // 発信ボタン設定
         myButton.frame = CGRectMake(0,0,80,80)
         myButton.backgroundColor = UIColor.blueColor();
         myButton.layer.masksToBounds = true
@@ -140,28 +75,35 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
             makeMyWindow()
             
             // iBeaconのUUID.
+            let LSUuid : String = LSManager.lsmanager.getLSString("uuid")
+            if(LSUuid != ""){
+                myUuid = LSUuid
+            }
             let myProximityUUID = NSUUID(UUIDString: myUuid)
             
             // iBeaconのIdentifier.
             let myIdentifier = "akabeacon"
             
             // MajorId
-            let myMajorString: NSString = myMajorId1 + myMajorId2
+            let LSMajorid : String = LSManager.lsmanager.getLSString("majorid")
+            if(LSMajorid != ""){
+                myMajorString = LSMajorid
+            }
             var myMajorInt: CUnsignedInt = 0
-            
             NSScanner(string: myMajorString).scanHexInt(&myMajorInt)
             let myMajorId: CLBeaconMajorValue =  CLBeaconMajorValue(myMajorInt)
+
             // MinorId
-            let myMinorString: NSString = myMinorId1 + myMinorId2
+            let LSMinorid : String = LSManager.lsmanager.getLSString("minorid")
+            if(LSMinorid == ""){
+                myMinorString = LSMinorid
+            }
             var myMinorInt: CUnsignedInt = 0
-            
             NSScanner(string: myMinorString).scanHexInt(&myMinorInt)
             let myMinorId: CLBeaconMajorValue =  CLBeaconMajorValue(myMinorInt)
             
             // BeaconRegionを定義.
             let myBeaconRegion = CLBeaconRegion(proximityUUID: myProximityUUID, major: myMajorId, minor: myMinorId, identifier: myIdentifier)
-            
-            println("uuid: \(myUuid) major:\(myMajorId) minor:\(myMinorId)")
             
             // Advertisingのフォーマットを作成.
             let myBeaconPeripheralData = myBeaconRegion.peripheralDataWithMeasuredPower(nil)
@@ -206,7 +148,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         // TextView生成
         let myTextView: UITextView = UITextView(frame: CGRectMake(10, 110, self.myWindow.frame.width - 20, 150))
         myTextView.backgroundColor = UIColor.clearColor()
-        myTextView.text = "iBeaconの発信を開始しました。\n\n UUID:\n\(myUuid)\n Major Id:\(myMajorId1)\(myMajorId2) \n Minor Id:\(myMinorId1)\(myMinorId2)"
+        myTextView.text = "iBeaconの発信を開始しました。\n\n UUID:\n\(myUuid)\n Major Id:\(myMajorString) \n Minor Id:\(myMinorString)"
         myTextView.font = UIFont.systemFontOfSize(CGFloat(15))
         myTextView.textColor = UIColor.blackColor()
         myTextView.textAlignment = NSTextAlignment.Left
@@ -230,138 +172,5 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UIPickerVie
         
         println("peripheralManagerDidStartAdvertising")
     }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        
-        return 1
-        
-    }
-    
-    /*
-    フォントを設定
-    */
-    func pickerView(pickerView: UIPickerView!, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView! {
-        
-        var lab : UILabel = UILabel()
-        
-        if let label = view as? UILabel {
-            
-            lab = label
-            
-            println("reusing label")
-            
-        }
-
-        
-        lab.text = self.myValues[row] as? String
-
-        lab.font = UIFont.systemFontOfSize(CGFloat(25))
-        lab.backgroundColor = UIColor.clearColor()
-        
-        lab.sizeToFit()
-        
-        return lab
-        
-    }
-    
-    /*
-    表示するデータ数.
-    */
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
-        return myValues.count
-
-    }
-    
-    /*
-    値を代入.
-    */
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
-
-        return myValues[row] as String
-
-    }
-    
-    /*
-    Pickerが選択された際に呼ばれる.
-    */
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        if pickerView == majorIdPicker1 {
-            
-            myMajorId1 = myValues[row] as String
-            
-        } else if pickerView == majorIdPicker2 {
-            
-            myMajorId2 = myValues[row] as String
-            
-        } else if pickerView == minorIdPicker1 {
-            
-            myMinorId1 = myValues[row] as String
-            
-        } else if pickerView == minorIdPicker2 {
-            
-            myMinorId2 = myValues[row] as String
-                
-        }
-
-        
-    }
-    
-    /*
-    UITextFieldが編集開始された直後に呼ばれる
-    */
-    func textFieldDidBeginEditing(textField: UITextField!){
-        
-        return;
-
-    }
-    
-    /*
-    UITextFieldが編集終了する直前に呼ばれる
-    */
-    func textFieldShouldEndEditing(textField: UITextField!) -> Bool {
-        
-        myUuid = textField.text;
-        
-        
-        return true;
-        
-    }
-    
-    /*
-    改行ボタンが押された際に呼ばれる
-    */
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        return true;
-        
-    }
-
-    /* --- 下記はLSストレージ保存処理。後ほど別クラスに移植する --- */
-    //--- ここから ---
-    //保存のキー名
-    private let UserNumber = "UserNumber"
-    private let PassWord = "PassWord"
-
-    /*
-    入力された社員番号をLSに保存する
-    */
-    func setUserNumber(userNumber : String){
-        NSUserDefaults().setValue(userNumber, forKey: UserNumber)
-        NSUserDefaults().synchronize()
-    }
-    /*
-    入力されたパスワードをLSに保存する
-    */
-    func setPassword(password : String){
-        NSUserDefaults().setValue(password, forKey: PassWord)
-        NSUserDefaults().synchronize()
-    }
-    //--- ここまで ---
-    
-    
     
 }

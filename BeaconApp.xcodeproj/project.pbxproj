@@ -18,6 +18,7 @@
 		AEB0A7F81A1192B30090F8E7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A7F71A1192B30090F8E7 /* Logger.swift */; };
 		AEB0A7FA1A11973E0090F8E7 /* BLEPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0A7F91A11973E0090F8E7 /* BLEPeripheralManager.swift */; };
 		B547CC501A11FB020019C6D0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547CC4F1A11FB020019C6D0 /* SettingsViewController.swift */; };
+		B547CC521A15B2910019C6D0 /* LSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547CC511A15B2910019C6D0 /* LSManager.swift */; };
 		B5965A451A107C0B0001C17C /* ibeacon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5965A441A107C0B0001C17C /* ibeacon.png */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		AEB0A7F71A1192B30090F8E7 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		AEB0A7F91A11973E0090F8E7 /* BLEPeripheralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEPeripheralManager.swift; sourceTree = "<group>"; };
 		B547CC4F1A11FB020019C6D0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B547CC511A15B2910019C6D0 /* LSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LSManager.swift; sourceTree = "<group>"; };
 		B5965A441A107C0B0001C17C /* ibeacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibeacon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +99,7 @@
 				B5965A441A107C0B0001C17C /* ibeacon.png */,
 				B547CC4F1A11FB020019C6D0 /* SettingsViewController.swift */,
 				3608C3091A09FCDD006D06DF /* ViewController.swift */,
+				B547CC511A15B2910019C6D0 /* LSManager.swift */,
 				3608C30B1A09FCDD006D06DF /* Main.storyboard */,
 				3608C30E1A09FCDD006D06DF /* Images.xcassets */,
 				3608C3101A09FCDD006D06DF /* LaunchScreen.xib */,
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B547CC521A15B2910019C6D0 /* LSManager.swift in Sources */,
 				3608C30A1A09FCDD006D06DF /* ViewController.swift in Sources */,
 				AEB0A7F81A1192B30090F8E7 /* Logger.swift in Sources */,
 				3608C3081A09FCDD006D06DF /* AppDelegate.swift in Sources */,
