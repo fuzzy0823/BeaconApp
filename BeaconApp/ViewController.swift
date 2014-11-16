@@ -29,10 +29,16 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
         
         // PeripheralManagerを定義.
         myPheripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+
+        setView()
         
+    }
+    
+    func setView(){
+
         let centexOfX: CGFloat = self.view.bounds.width/2
         let centerOfY: CGFloat = self.view.bounds.height/2
-        
+
         // 発信ボタン設定
         myButton.frame = CGRectMake(0,0,80,80)
         myButton.backgroundColor = UIColor.blueColor();
@@ -51,7 +57,10 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
         
     }
     
-    
+    // 画面が回転されたとき
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        setView()
+    }
     
     /*
     ボタンイベント
@@ -162,7 +171,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
         self.myWindow.addSubview(myImageView)
         
     }
-    
+
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager!) {
         
         println("peripheralManagerDidUpdateState")
