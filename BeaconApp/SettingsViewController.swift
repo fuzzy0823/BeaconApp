@@ -28,27 +28,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         setView()
-
-//        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height   // ステータスバーの高さ
-//        let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
-//        let displayHeight: CGFloat = self.view.frame.height // Viewの高さ
-        
-//        // TableViewの生成( status barの高さ分ずらして表示 ).
-//        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 220))
-//        myTableView.scrollEnabled = false
-//        
-//        // Cell名の登録をおこなう.
-//        myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-//        
-//        myTableView.dataSource = self
-//        myTableView.delegate = self
-//        self.view.addSubview(myTableView)
     }
 
     func setView(){
         let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height   // ステータスバーの高さ
         let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
         let displayHeight: CGFloat = self.view.frame.height // Viewの高さ
+        // Table
         if(myTableView == nil){
             myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 220))
             myTableView.scrollEnabled = false
@@ -59,6 +45,18 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }else{
             myTableView.frame = CGRectMake(0, barHeight + 50, displayWidth, 220)
         }
+
+        // Text
+        if(uuidField != nil){
+            uuidField.frame = CGRectMake(10,6,displayWidth - 20,30)
+        }
+        if(majoridField != nil){
+            majoridField.frame = CGRectMake(10,6,displayWidth - 20,30)
+        }
+        if(minoridField != nil){
+            minoridField.frame = CGRectMake(10,6,displayWidth - 20,30)
+        }
+
     }
     // 画面が回転されたとき
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -88,15 +86,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        // 各Textにフォーカスをあてる
         if indexPath.section == 0 {
             uuidField.becomeFirstResponder()
-//            println("Value: \(myiPhoneItems[indexPath.row])")
         } else if indexPath.section == 1 {
             majoridField.becomeFirstResponder()
-//            println("Value: \(myAndroidItems[indexPath.row])")
         } else if indexPath.section == 2 {
             minoridField.becomeFirstResponder()
-//            println("Value: \(myAndroidItems2[indexPath.row])")
         }
     }
     
@@ -104,15 +100,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     テーブルに表示する配列の総数を返す.
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            
-//            return myiPhoneItems.count
-        } else if section == 1 {
-//            return myAndroidItems.count
-        } else if section == 2 {
-//            return myAndroidItems2.count
-        }
-        
+//        if section == 0 {
+//        } else if section == 1 {
+//        } else if section == 2 {
+//        }
         return 1
     }
     
@@ -122,11 +113,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
-        
+
+        let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
         if indexPath.section == 0 { // このへんはVeiwDidLoadでやっておくべき？
 
 //            let uuidField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            uuidField = UITextField(frame: CGRectMake(10,6,300,30))
+            uuidField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
             let LSUuid = LSManager.lsmanager.getLSString("uuid")
             if (LSUuid != ""){
                 uuidField.text = LSUuid
@@ -142,7 +134,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         } else if indexPath.section == 1 {
 //            let majoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            majoridField = UITextField(frame: CGRectMake(10,6,300,30))
+            majoridField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
             let LSMajorid = LSManager.lsmanager.getLSString("majorid")
             if (LSMajorid != ""){
                 majoridField.text = LSMajorid
@@ -158,7 +150,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
         } else if indexPath.section == 2 {
 //            let minoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            minoridField = UITextField(frame: CGRectMake(10,6,300,30))
+            minoridField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
             let LSMinorid = LSManager.lsmanager.getLSString("minorid")
             if (LSMinorid != ""){
                 minoridField.text = LSMinorid

@@ -37,7 +37,7 @@ class LSManager{
     func getLSString(key : String) -> String{
         var value :String? = NSUserDefaults.standardUserDefaults().stringForKey(key)
         // ローカルストレージの取得に失敗した場合
-        if value == nil{
+        if(value == nil){
             value = "";
             setLS(key, value: "")
         }

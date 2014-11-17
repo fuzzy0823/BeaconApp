@@ -24,12 +24,12 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
     var myMinorString: NSString = "00"
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         // PeripheralManagerを定義.
         myPheripheralManager = CBPeripheralManager(delegate: self, queue: nil)
 
+        
         setView()
         
     }
@@ -80,9 +80,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
             myWindow = UIWindow()
             
             myButton.hidden = true
-            
-            makeMyWindow()
-            
+
             // iBeaconのUUID.
             let LSUuid : String = LSManager.lsmanager.getLSString("uuid")
             if(LSUuid != ""){
@@ -97,7 +95,9 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
             let LSMajorid : String = LSManager.lsmanager.getLSString("majorid")
             if(LSMajorid != ""){
                 myMajorString = LSMajorid
+                println(myMajorString)
             }
+            println(myMajorString)
             var myMajorInt: CUnsignedInt = 0
             NSScanner(string: myMajorString).scanHexInt(&myMajorInt)
             let myMajorId: CLBeaconMajorValue =  CLBeaconMajorValue(myMajorInt)
@@ -110,7 +110,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
             var myMinorInt: CUnsignedInt = 0
             NSScanner(string: myMinorString).scanHexInt(&myMinorInt)
             let myMinorId: CLBeaconMajorValue =  CLBeaconMajorValue(myMinorInt)
-            
+
             // BeaconRegionを定義.
             let myBeaconRegion = CLBeaconRegion(proximityUUID: myProximityUUID, major: myMajorId, minor: myMinorId, identifier: myIdentifier)
             
@@ -119,6 +119,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
             println(myBeaconPeripheralData)
             // Advertisingを発信.
             myPheripheralManager.startAdvertising(myBeaconPeripheralData)
+            
+            makeMyWindow()
             
         }
         
@@ -157,6 +159,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
         // TextView生成
         let myTextView: UITextView = UITextView(frame: CGRectMake(10, 110, self.myWindow.frame.width - 20, 150))
         myTextView.backgroundColor = UIColor.clearColor()
+        println(myMajorString)
         myTextView.text = "iBeaconの発信を開始しました。\n\n UUID:\n\(myUuid)\n Major Id:\(myMajorString) \n Minor Id:\(myMinorString)"
         myTextView.font = UIFont.systemFontOfSize(CGFloat(15))
         myTextView.textColor = UIColor.blackColor()
