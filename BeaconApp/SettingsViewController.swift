@@ -77,6 +77,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            
 //            return myiPhoneItems.count
         } else if section == 1 {
 //            return myAndroidItems.count
@@ -96,7 +97,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.section == 0 { // このへんはVeiwDidLoadでやっておくべき？
 
-            let uuidField: UITextField = UITextField(frame: CGRectMake(0,0,300,30))
+            let uuidField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSUuid = LSManager.lsmanager.getLSString("uuid")
             if (LSUuid != ""){
                 uuidField.text = LSUuid
@@ -106,12 +107,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             uuidField.delegate = self
             uuidField.borderStyle = UITextBorderStyle.None
-            uuidField.layer.position = CGPoint(x:self.view.bounds.width/2,y:120);
+//            uuidField.layer.position = CGPoint(x:self.view.bounds.width/2,y:120);
             uuidField.tag = 0;
-            self.view.addSubview(uuidField)
+            cell.contentView.addSubview(uuidField)
 
         } else if indexPath.section == 1 {
-            let majoridField: UITextField = UITextField(frame: CGRectMake(0,0,300,30))
+            let majoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSMajorid = LSManager.lsmanager.getLSString("majorid")
             if (LSMajorid != ""){
                 majoridField.text = LSMajorid
@@ -121,12 +122,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             majoridField.delegate = self
             majoridField.borderStyle = UITextBorderStyle.None
-            majoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:190);
+//            majoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:190);
             majoridField.tag = 1;
-            self.view.addSubview(majoridField)
+            cell.contentView.addSubview(majoridField)
 
         } else if indexPath.section == 2 {
-            let minoridField: UITextField = UITextField(frame: CGRectMake(0,0,300,30))
+            let minoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSMinorid = LSManager.lsmanager.getLSString("minorid")
             if (LSMinorid != ""){
                 minoridField.text = LSMinorid
@@ -136,9 +137,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
             minoridField.delegate = self
             minoridField.borderStyle = UITextBorderStyle.None
-            minoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:260);
+//            minoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:260);
             minoridField.tag = 2;
-            self.view.addSubview(minoridField)
+            cell.contentView.addSubview(minoridField)
 
         }
         return cell
