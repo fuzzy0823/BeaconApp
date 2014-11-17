@@ -104,7 +104,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, UITextField
 
             // MinorId
             let LSMinorid : String = LSManager.lsmanager.getLSString("minorid")
-            if(LSMinorid == ""){
+            if(LSMinorid != ""){
                 myMinorString = LSMinorid
             }
             var myMinorInt: CUnsignedInt = 0

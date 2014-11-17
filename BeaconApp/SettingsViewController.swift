@@ -12,6 +12,11 @@ import CoreBluetooth
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , UITextFieldDelegate{
     
+    var myTableView: UITableView!
+    var uuidField: UITextField!
+    var majoridField: UITextField!
+    var minoridField: UITextField!
+    
     @IBAction func goBack() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -22,22 +27,42 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Status Barの高さを取得する.
-        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height
+        setView()
+
+//        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height   // ステータスバーの高さ
+//        let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
+//        let displayHeight: CGFloat = self.view.frame.height // Viewの高さ
         
-        // Viewの高さと幅を取得する.
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        // TableViewの生成( status barの高さ分ずらして表示 ).
-        let myTableView: UITableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: displayHeight - barHeight))
-        
-        // Cell名の登録をおこなう.
-        myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-        
-        myTableView.dataSource = self
-        myTableView.delegate = self
-        self.view.addSubview(myTableView)
+//        // TableViewの生成( status barの高さ分ずらして表示 ).
+//        myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 220))
+//        myTableView.scrollEnabled = false
+//        
+//        // Cell名の登録をおこなう.
+//        myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+//        
+//        myTableView.dataSource = self
+//        myTableView.delegate = self
+//        self.view.addSubview(myTableView)
+    }
+
+    func setView(){
+        let barHeight: CGFloat = UIApplication.sharedApplication().statusBarFrame.size.height   // ステータスバーの高さ
+        let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
+        let displayHeight: CGFloat = self.view.frame.height // Viewの高さ
+        if(myTableView == nil){
+            myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 220))
+            myTableView.scrollEnabled = false
+            myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+            myTableView.dataSource = self
+            myTableView.delegate = self
+            self.view.addSubview(myTableView)
+        }else{
+            myTableView.frame = CGRectMake(0, barHeight + 50, displayWidth, 220)
+        }
+    }
+    // 画面が回転されたとき
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        setView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,10 +89,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
+            uuidField.becomeFirstResponder()
 //            println("Value: \(myiPhoneItems[indexPath.row])")
         } else if indexPath.section == 1 {
+            majoridField.becomeFirstResponder()
 //            println("Value: \(myAndroidItems[indexPath.row])")
         } else if indexPath.section == 2 {
+            minoridField.becomeFirstResponder()
 //            println("Value: \(myAndroidItems2[indexPath.row])")
         }
     }
@@ -97,7 +125,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.section == 0 { // このへんはVeiwDidLoadでやっておくべき？
 
-            let uuidField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+//            let uuidField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+            uuidField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSUuid = LSManager.lsmanager.getLSString("uuid")
             if (LSUuid != ""){
                 uuidField.text = LSUuid
@@ -112,7 +141,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.contentView.addSubview(uuidField)
 
         } else if indexPath.section == 1 {
-            let majoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+//            let majoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+            majoridField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSMajorid = LSManager.lsmanager.getLSString("majorid")
             if (LSMajorid != ""){
                 majoridField.text = LSMajorid
@@ -127,7 +157,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.contentView.addSubview(majoridField)
 
         } else if indexPath.section == 2 {
-            let minoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+//            let minoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
+            minoridField = UITextField(frame: CGRectMake(10,6,300,30))
             let LSMinorid = LSManager.lsmanager.getLSString("minorid")
             if (LSMinorid != ""){
                 minoridField.text = LSMinorid
@@ -142,6 +173,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.contentView.addSubview(minoridField)
 
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
 
