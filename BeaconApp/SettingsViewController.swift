@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     // Sectionで使用する配列を定義する.
-    let mySections: NSArray = ["UUID", "MajorID", "MinorID"]
+    let mySections: [String] = ["UUID", "MajorID", "MinorID"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +36,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let displayHeight: CGFloat = self.view.frame.height // Viewの高さ
         // Table
         if(myTableView == nil){
-            myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 220))
+            myTableView = UITableView(frame: CGRect(x: 0, y: barHeight + 50, width: displayWidth, height: 150))
             myTableView.scrollEnabled = false
             myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
             myTableView.dataSource = self
             myTableView.delegate = self
             self.view.addSubview(myTableView)
         }else{
-            myTableView.frame = CGRectMake(0, barHeight + 50, displayWidth, 220)
+            myTableView.frame = CGRectMake(0, barHeight + 50, displayWidth, 150)
         }
 
         // Text
@@ -77,9 +77,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     /*
     セクションのタイトルを返す.
     */
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return mySections[section] as? String
-    }
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return mySections[section] as String
+//    }
     
     /*
     Cellが選択された際に呼び出される.
@@ -115,10 +115,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath) as UITableViewCell
 
         let displayWidth: CGFloat = self.view.frame.width   // Viewの幅
+        cell.textLabel.text = mySections[indexPath.section]
         if indexPath.section == 0 { // このへんはVeiwDidLoadでやっておくべき？
+            
 
 //            let uuidField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            uuidField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
+            uuidField = UITextField(frame: CGRectMake(80,7,displayWidth - 100,30))
             let LSUuid = LSManager.lsmanager.getLSString("uuid")
             if (LSUuid != ""){
                 uuidField.text = LSUuid
@@ -130,11 +132,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             uuidField.borderStyle = UITextBorderStyle.None
 //            uuidField.layer.position = CGPoint(x:self.view.bounds.width/2,y:120);
             uuidField.tag = 0;
+            uuidField.textAlignment = NSTextAlignment.Right
+            uuidField.textColor = UIColor(red:0.0,green:122.0/255.0,blue:1.0,alpha:1.0)
             cell.contentView.addSubview(uuidField)
 
         } else if indexPath.section == 1 {
 //            let majoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            majoridField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
+            majoridField = UITextField(frame: CGRectMake(80,7,displayWidth - 100,30))
             let LSMajorid = LSManager.lsmanager.getLSString("majorid")
             if (LSMajorid != ""){
                 majoridField.text = LSMajorid
@@ -146,11 +150,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             majoridField.borderStyle = UITextBorderStyle.None
 //            majoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:190);
             majoridField.tag = 1;
+            majoridField.textAlignment = NSTextAlignment.Right
+            majoridField.textColor = UIColor(red:0.0,green:122.0/255.0,blue:1.0,alpha:1.0)
             cell.contentView.addSubview(majoridField)
 
         } else if indexPath.section == 2 {
 //            let minoridField: UITextField = UITextField(frame: CGRectMake(10,6,300,30))
-            minoridField = UITextField(frame: CGRectMake(10,6,displayWidth - 20,30))
+            minoridField = UITextField(frame: CGRectMake(80,7,displayWidth - 100,30))
             let LSMinorid = LSManager.lsmanager.getLSString("minorid")
             if (LSMinorid != ""){
                 minoridField.text = LSMinorid
@@ -162,6 +168,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             minoridField.borderStyle = UITextBorderStyle.None
 //            minoridField.layer.position = CGPoint(x:self.view.bounds.width/2,y:260);
             minoridField.tag = 2;
+            minoridField.textAlignment = NSTextAlignment.Right
+            minoridField.textColor = UIColor(red:0.0,green:122.0/255.0,blue:1.0,alpha:1.0)
             cell.contentView.addSubview(minoridField)
 
         }
